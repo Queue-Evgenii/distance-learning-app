@@ -1,30 +1,36 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <layout-default v-if="$route.meta.layout">
+    <router-view />
+  </layout-default>
+  <router-view v-else />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { defineComponent } from "vue";
+import LayoutDefault from "./layouts/LayoutDefault.vue";
 
-nav {
-  padding: 30px;
+import "@/assets/styles/reset.css";
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+export default defineComponent({
+  name: "App",
+  components: {
+    LayoutDefault,
+  },
+});
+</script>
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style lang="css">
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  background-color: rgb(35, 39, 47);
+
+  font-family: "Montserrat", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  font-size: 16px;
+  line-height: 1.25;
+  color: rgb(246, 247, 249);
 }
 </style>

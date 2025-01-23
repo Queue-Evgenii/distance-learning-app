@@ -1,9 +1,12 @@
 import { createStore } from "vuex";
+import translationsModule, { TranslationsState } from "./modules/translations";
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+export interface State {
+  translations: TranslationsState;
+}
+
+export const store = createStore<State>({
+  modules: {
+    translations: translationsModule,
+  },
 });
