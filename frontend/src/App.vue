@@ -33,4 +33,10 @@ body {
   line-height: 1.25;
   color: rgb(246, 247, 249);
 }
+
+._block {
+  padding: 16px 24px;
+  border: 1px solid rgb(246, 247, 249);
+  border-radius: 16px;
+}
 </style>
