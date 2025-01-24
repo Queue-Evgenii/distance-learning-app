@@ -3,11 +3,7 @@ import { State as RootState } from "@/store/index";
 import { TranslationKeys } from "@/models/enums/TranslationKeys";
 import en from "@/locales/en";
 import uk from "@/locales/uk";
-
-export interface TranslationsState {
-  locale: string;
-  translations: Record<string, Record<string, string>>;
-}
+import { TranslationsState } from "../models/TranslationState";
 
 const translationsModule: Module<TranslationsState, RootState> = {
   namespaced: true,

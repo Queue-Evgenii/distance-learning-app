@@ -33,12 +33,15 @@ import { UserApi } from "@/api/modules/user";
 import { LoginDto } from "@/models/dto/LoginDto";
 import { Token } from "@/models/browser/Token";
 import router from "@/router";
+import { State } from "@/store";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "AuthView",
   components: { ButtonComponent, InputComponent },
   setup() {
     const { translate } = useTranslate();
+    const store = useStore<State>();
     const error = ref("");
 
     const fields = {
@@ -65,6 +68,7 @@ export default defineComponent({
         .fetchUser()
         .then((data) => {
           console.log("AuthView", data);
+          store.commit("user/setUser", data);
           router.replace("/home");
         })
         .catch((err) => console.log("AuthView fetchUser Error", err));

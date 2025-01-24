@@ -13,6 +13,8 @@ import "@/assets/styles/reset.css";
 import "@/assets/styles/flex.css";
 import { UserApi } from "./api/modules/user";
 import router from "./router";
+import { useStore } from "vuex";
+import { State } from "./store";
 
 export default defineComponent({
   name: "App",
@@ -20,12 +22,14 @@ export default defineComponent({
     LayoutDefault,
   },
   setup() {
+    const store = useStore<State>();
     const userApi = new UserApi();
 
     userApi
       .fetchUser()
-      .then((res) => {
-        console.log("App", res);
+      .then((data) => {
+        console.log("App", data);
+        store.commit("user/setUser", data);
         router.replace("/home");
       })
       .catch((err) => {
