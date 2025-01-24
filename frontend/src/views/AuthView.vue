@@ -23,18 +23,21 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
+import { useStore } from "vuex";
+import { State } from "@/store";
+import router from "@/router";
+
 import { TranslationKeys } from "@/models/enums/TranslationKeys";
-import { useTranslate } from "@/composables/useTranslate";
 import { InputType } from "@/models/enums/InputType";
+import { LoginDto } from "@/models/dto/LoginDto";
+import { Token } from "@/models/browser/Token";
+
+import { UserApi } from "@/api/modules/user";
 
 import ButtonComponent from "@/components/shared/ButtonComponent.vue";
 import InputComponent from "@/components/shared/InputComponent.vue";
-import { UserApi } from "@/api/modules/user";
-import { LoginDto } from "@/models/dto/LoginDto";
-import { Token } from "@/models/browser/Token";
-import router from "@/router";
-import { State } from "@/store";
-import { useStore } from "vuex";
+
+import { useTranslate } from "@/composables/useTranslate";
 
 export default defineComponent({
   name: "AuthView",
