@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
-import translationsModule, { TranslationsState } from "./modules/translations";
+import translationsModule, {
+  TranslationsState,
+} from "./modules/translations.module";
 
 export interface State {
   translations: TranslationsState;

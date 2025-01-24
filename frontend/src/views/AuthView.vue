@@ -1,6 +1,9 @@
 <template>
   <main class="auth">
-    <div class="_block">
+    <div class="_block _flex _f-dir-col _y-gap-16">
+      <div class="_image">
+        <img src="../assets/logo.png" alt="" />
+      </div>
       <input-component
         v-for="(field, key) in fields"
         :key="key"
@@ -12,11 +15,7 @@
         :errors="loginData[key].errors"
       />
       <button-component @click="clickHandler">
-        {{
-          isLogin
-            ? translate(TranslationKeys.LOGIN)
-            : translate(TranslationKeys.SIGNUP)
-        }}
+        {{ translate(TranslationKeys.LOGIN) }}
       </button-component>
     </div>
   </main>
@@ -24,9 +23,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { TranslationKeys } from "@/models/TranslationKeys";
+import { TranslationKeys } from "@/models/enums/TranslationKeys";
 import { useTranslate } from "@/composables/useTranslate";
-import { InputType } from "@/models/InputType";
+import { InputType } from "@/models/enums/InputType";
 
 import ButtonComponent from "@/components/shared/ButtonComponent.vue";
 import InputComponent from "@/components/shared/InputComponent.vue";
@@ -34,13 +33,9 @@ import InputComponent from "@/components/shared/InputComponent.vue";
 export default defineComponent({
   name: "AuthView",
   components: { ButtonComponent, InputComponent },
-  data() {
-    return {
-      isLogin: true,
-    };
-  },
   setup() {
     const { translate } = useTranslate();
+
     const fields = {
       email: {
         type: InputType.TEXT,
@@ -57,7 +52,7 @@ export default defineComponent({
     const loginData = reactive({
       email: {
         value: "",
-        errors: ["error"] as string[],
+        errors: [] as string[],
       },
       password: {
         value: "",
@@ -65,9 +60,7 @@ export default defineComponent({
       },
     });
 
-    const clickHandler = () => {
-      console.log(loginData);
-    };
+    const clickHandler = () => console.log(1);
     return {
       translate,
       TranslationKeys,
@@ -90,5 +83,12 @@ export default defineComponent({
 }
 .auth ._block {
   flex: 0 1 500px;
+}
+.auth ._image {
+  max-width: 72px;
+  margin: 0 auto;
+}
+.auth ._switch {
+  color: rgb(88, 196, 220);
 }
 </style>

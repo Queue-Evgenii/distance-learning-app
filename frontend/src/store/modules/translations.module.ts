@@ -1,6 +1,6 @@
 import { Module } from "vuex";
 import { State as RootState } from "@/store/index";
-import { TranslationKeys } from "@/models/TranslationKeys";
+import { TranslationKeys } from "@/models/enums/TranslationKeys";
 import en from "@/locales/en";
 import uk from "@/locales/uk";
 

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { ComponentType } from "@/models/ComponentType";
+import { ComponentType } from "@/models/enums/ComponentType";
 
 export default defineComponent({
   name: "ButtonComponent",

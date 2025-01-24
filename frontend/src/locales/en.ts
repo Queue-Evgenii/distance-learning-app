@@ -5,4 +5,7 @@ export default {
   email: "E-Mail",
   password: "Password",
   password_repeat: "Repeat password",
+
+  not_have_account: "Do not have an account? Sign Up",
+  have_account: "Do you have an account? Log In",
 };

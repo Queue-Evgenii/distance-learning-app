@@ -1,0 +1,10 @@
+._flex {
+  display: flex;
+}
+._f-dir-col {
+  flex-direction: column;
+}
+
+._y-gap-16 {
+  row-gap: 16px;
+}

@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { InputType } from "@/models/InputType";
+import { InputType } from "@/models/enums/InputType";
 
 export default defineComponent({
   name: "InputComponent",
@@ -92,7 +92,7 @@ export default defineComponent({
   row-gap: 6px;
 }
 .input-wrapper {
-  row-gap: 10px;
+  row-gap: 8px;
 }
 .input-errors {
   li {
