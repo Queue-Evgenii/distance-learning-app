@@ -29,15 +29,18 @@ export class UserService {
     });
   }
 
-  async login({ email, password }: LoginDto): Promise<{ accessToken: string }> {
+  async login({
+    email,
+    password,
+  }: LoginDto): Promise<{ access_token: string }> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user || !(await user.validatePassword(password))) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     const payload = { id: user.id, role: user.role };
-    const accessToken = this.jwtService.sign(payload);
-    return { accessToken };
+    const access_token = this.jwtService.sign(payload);
+    return { access_token };
   }
 
   async getUserById(userId: number): Promise<User> {
