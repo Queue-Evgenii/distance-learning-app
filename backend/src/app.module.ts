@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FacultyModule } from './faculty/faculty.module';
-import { SpecialityModule } from './speciality/speciality.module';
-import { UserModule } from './user/user.module';
-import { CourseModule } from './course/course.module';
-import { GroupModule } from './group/group.module';
+import { FacultyModule } from './modules/faculty/faculty.module';
+import { SpecialityModule } from './modules/speciality/speciality.module';
+import { UserModule } from './modules/user/user.module';
+import { CourseModule } from './modules/course/course.module';
+import { GroupModule } from './modules/group/group.module';
 
 @Module({
   imports: [
