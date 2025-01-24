@@ -16,12 +16,13 @@
       <button-component @click="clickHandler">
         {{ translate(TranslationKeys.LOGIN) }}
       </button-component>
+      <span v-if="error" class="_error">{{ error }}</span>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { TranslationKeys } from "@/models/enums/TranslationKeys";
 import { useTranslate } from "@/composables/useTranslate";
 import { InputType } from "@/models/enums/InputType";
@@ -38,6 +39,7 @@ export default defineComponent({
   components: { ButtonComponent, InputComponent },
   setup() {
     const { translate } = useTranslate();
+    const error = ref("");
 
     const fields = {
       email: {
@@ -71,11 +73,14 @@ export default defineComponent({
       userApi
         .login(loginData)
         .then((data) => {
-          console.log(data.access_token);
+          error.value = "";
           Token.set(data.access_token);
           fetchUser();
         })
-        .catch((err) => console.log("AuthView login Error", err));
+        .catch((err) => {
+          console.log("AuthView login Error", err);
+          error.value = "* Wrong email or password :(";
+        });
     };
     return {
       translate,
@@ -84,6 +89,7 @@ export default defineComponent({
       InputType,
       fields,
       loginData,
+      error,
     };
   },
 });
@@ -104,7 +110,9 @@ export default defineComponent({
   max-width: 72px;
   margin: 0 auto;
 }
-.auth ._switch {
-  color: rgb(88, 196, 220);
+.auth ._error {
+  color: #cf6679;
+  display: inline-block;
+  margin-left: 8px;
 }
 </style>
