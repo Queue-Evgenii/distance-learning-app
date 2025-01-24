@@ -11,8 +11,13 @@ export class Api {
       headers: {
         ContentType: "application/json",
         Accept: "application/json",
-        Authorization: Token.exists() ? `Bearer ${Token.get()}` : "",
       },
+    });
+    this.apiClient.interceptors.request.use((config) => {
+      if (Token.exists()) {
+        config.headers.Authorization = `Bearer ${Token.get()}`;
+      }
+      return config;
     });
     this.endpoint = endpoint;
   }

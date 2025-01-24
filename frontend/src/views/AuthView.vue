@@ -9,10 +9,9 @@
         :key="key"
         :id="key"
         :type="field.type"
-        v-model="loginData[key].value"
+        v-model="loginData[key]"
         :label="translate(field.labelKey)"
         :placeholder="translate(field.placeholderKey)"
-        :errors="loginData[key].errors"
       />
       <button-component @click="clickHandler">
         {{ translate(TranslationKeys.LOGIN) }}
@@ -53,15 +52,9 @@ export default defineComponent({
       },
     };
 
-    const loginData = reactive({
-      email: {
-        value: "",
-        errors: [] as string[],
-      },
-      password: {
-        value: "",
-        errors: [] as string[],
-      },
+    const loginData = reactive<LoginDto>({
+      email: "",
+      password: "",
     });
 
     const userApi = new UserApi();
@@ -75,13 +68,10 @@ export default defineComponent({
         .catch((err) => console.log("AuthView fetchUser Error", err));
     };
     const clickHandler = () => {
-      const data: LoginDto = {
-        email: loginData.email.value,
-        password: loginData.password.value,
-      };
       userApi
-        .login(data)
+        .login(loginData)
         .then((data) => {
+          console.log(data.access_token);
           Token.set(data.access_token);
           fetchUser();
         })
