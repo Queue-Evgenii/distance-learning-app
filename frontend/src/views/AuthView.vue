@@ -29,6 +29,10 @@ import { InputType } from "@/models/enums/InputType";
 
 import ButtonComponent from "@/components/shared/ButtonComponent.vue";
 import InputComponent from "@/components/shared/InputComponent.vue";
+import { UserApi } from "@/api/modules/user";
+import { LoginDto } from "@/models/dto/LoginDto";
+import { Token } from "@/models/browser/Token";
+import router from "@/router";
 
 export default defineComponent({
   name: "AuthView",
@@ -60,7 +64,29 @@ export default defineComponent({
       },
     });
 
-    const clickHandler = () => console.log(1);
+    const userApi = new UserApi();
+    const fetchUser = () => {
+      userApi
+        .fetchUser()
+        .then((data) => {
+          console.log("AuthView", data);
+          router.replace("/home");
+        })
+        .catch((err) => console.log("AuthView fetchUser Error", err));
+    };
+    const clickHandler = () => {
+      const data: LoginDto = {
+        email: loginData.email.value,
+        password: loginData.password.value,
+      };
+      userApi
+        .login(data)
+        .then((data) => {
+          Token.set(data.access_token);
+          fetchUser();
+        })
+        .catch((err) => console.log("AuthView login Error", err));
+    };
     return {
       translate,
       TranslationKeys,

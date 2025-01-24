@@ -11,11 +11,27 @@ import LayoutDefault from "./layouts/LayoutDefault.vue";
 
 import "@/assets/styles/reset.css";
 import "@/assets/styles/flex.css";
+import { UserApi } from "./api/modules/user";
+import router from "./router";
 
 export default defineComponent({
   name: "App",
   components: {
     LayoutDefault,
+  },
+  setup() {
+    const userApi = new UserApi();
+
+    userApi
+      .fetchUser()
+      .then((res) => {
+        console.log("App", res);
+        router.replace("/home");
+      })
+      .catch((err) => {
+        console.log("App fetchUser Error", err);
+        router.replace("/auth");
+      });
   },
 });
 </script>
